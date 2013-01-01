@@ -91,37 +91,7 @@ else {
 		}
 
 		// Stick it in
-		var row = document.createElement('tr');
-		var infoLink = table.querySelector('a');
-		if(!table.loaded) { // first run
-			var courseId = infoLink.id.split('_')[3];
-			var infoLink = table.querySelector('a');
-			var courseId = infoLink.id.split('_')[3];
-			var postbackForm = document.querySelector('#aspnetForm');
-			postbackForm.__EVENTTARGET.value = 'ctl00$pageContent$CourseList$' + courseId + '$CourseDetailLink';
-			var fData = new FormData(postbackForm);
-			var fReq = new XMLHttpRequest();
-			fReq.addEventListener("load", function(req, table){
-				return function(){infoCallback(req,table);};
-			}(fReq, table), false);
-			fReq.open("POST", window.location, true);
-			fReq.send(fData);
-
-			infoLink.innerHTML = 'loading...';
-			table.loaded = true;
-		}
-		else { // already loaded; just toggle visibility
-			var contentEle = table.querySelector('#content');
-			if(contentEle.style.display == 'none') {
-				contentEle.style.display = '';
-				infoLink.innerHTML = 'hide info';
-			}
-			else {
-				contentEle.style.display = 'none';
-				infoLink.innerHTML = 'show info';
-			}
-		}
-		
+		var row = document.createElement('tr');		
 		var col = document.createElement('td');
 		col.setAttribute('colspan', 10);
 		col.appendChild(contentEle);
